@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WeatherService } from './weather.service';
+import { FormBuilder, FormGroup  } from '@angular/forms';
 
 export interface Weather {
   temp: String;
@@ -14,13 +15,18 @@ export interface Weather {
 })
 
 export class AppComponent {
+  cityForm: FormGroup;
   title = 'angular-weather';
   dataSource: any;
   temp: any;
   time: any;
-  constructor(private weatherService: WeatherService){}
+  cities = ['Santiago', 'New York', 'Caracas', 'Buenos Aires']
+  constructor(private fb: FormBuilder, private weatherService: WeatherService){}
 
   ngOnInit() {
+    this.cityForm = this.fb.group({
+      cityControl: ['Santiago']
+    });
     this.updateWeather("santiago");
   }
 
@@ -31,6 +37,11 @@ export class AppComponent {
       this.time = this.dataSource.data.time_zone[0].localtime;
     });
   } 
+
+  updateSelect(newcity) {
+    console.log(newcity);
+    this.cities.push(newcity);
+  }
   
 
 }

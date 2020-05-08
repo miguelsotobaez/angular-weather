@@ -1,7 +1,10 @@
-<select id="weather" (change)="updateWeather($event.target.value)">
-  <option value="santiago">Santiago, Chile</option>
-  <option value="new york">Nueva York, Estados Unidos</option>
-  <option value="caracas">Caracas, Venezuela</option>
-  <option value="buenos aires">Buenos Aires, Argentina</option>
-</select>
-<h1>{{temp}} Cº at {{time}}</h1>
+<form [formGroup]="cityForm">
+  <select formControlName="cityControl" id="weather" (change)="updateWeather($event.target.value)">
+    <option [value]="city" *ngFor="let city of cities">{{city}}</option>
+
+  </select>
+  <h1>{{temp}} Cº at {{time}}</h1>
+  <button value="London" (click)="updateSelect($event.target.value); londonButton.disabled = true" #londonButton>Add London</button>
+  <button value="Medellín" (click)="updateSelect($event.target.value); medellinButton.disabled = true" #medellinButton>Add Medellín</button>
+  <button value="Madrid" (click)="updateSelect($event.target.value); madridButton.disabled = true" #madridButton>Add Madrid</button>
+</form>
